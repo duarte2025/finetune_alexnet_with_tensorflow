@@ -27,12 +27,12 @@ Configuration Part.
 """
 
 # Path to the textfiles for the trainings and validation set
-train_file = '/path/to/train.txt'
-val_file = '/path/to/val.txt'
+train_file = 'train.txt'
+val_file = 'test.txt'
 
 # Learning params
-learning_rate = 0.01
-num_epochs = 10
+learning_rate = 0.001
+num_epochs = 2
 batch_size = 128
 
 # Network params
@@ -44,8 +44,8 @@ train_layers = ['fc8', 'fc7', 'fc6']
 display_step = 20
 
 # Path for tf.summary.FileWriter and to store model checkpoints
-filewriter_path = "/tmp/finetune_alexnet/tensorboard"
-checkpoint_path = "/tmp/finetune_alexnet/checkpoints"
+filewriter_path = "tensorboard"
+checkpoint_path = "checkpoints"
 
 """
 Main Part of the finetuning Script.
@@ -162,10 +162,11 @@ with tf.Session() as sess:
 
         # Initialize iterator with the training dataset
         sess.run(training_init_op)
-
+        print(range(train_batches_per_epoch))
         for step in range(train_batches_per_epoch):
 
             # get next batch of data
+            print(step)
             img_batch, label_batch = sess.run(next_batch)
 
             # And run the training op
